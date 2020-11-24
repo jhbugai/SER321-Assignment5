@@ -2,6 +2,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MergeSort {
     /**
@@ -33,31 +34,31 @@ public class MergeSort {
         return req;
     }
 
-    public static void Test(int port, char array) {
+    public static void Test(int port, String host, char array) {
         JSONObject response = null;
         if (array == 'a') {
             int[] a = { 5, 1, 6, 2, 3, 4, 10,634,34,23,653, 23,2 ,6 };
-            response = NetworkUtils.send(port, init(a));
+            response = NetworkUtils.send(port, host, init(a));
         } else if(array == 'b') {
             int[] b = new int[100];
             for (int i = 0; i < 100; i++) {
                 b[i] = (int) ((Math.random() * 100));
             }
-            response = NetworkUtils.send(port, init(b));
+            response = NetworkUtils.send(port, host, init(b));
         } else if (array == 'c') {
             int[] c = new int[1000];
             for (int j = 0; j < 1000; j++) {
                 c[j] = (int) ((Math.random() * 1000));
             }
-            response = NetworkUtils.send(port, init(c));
+            response = NetworkUtils.send(port, host, init(c));
         }
 
         System.out.println(response);
-        response = NetworkUtils.send(port, peek());
+        response = NetworkUtils.send(port, host, peek());
         System.out.println(response);
 
         while (true) {
-            response = NetworkUtils.send(port, remove());
+            response = NetworkUtils.send(port, host, remove());
 
             if (response.getBoolean("hasValue")) {
                 System.out.println(response);;
@@ -82,7 +83,27 @@ public class MergeSort {
         // 3   4 5   6
 
         if (node.equalsIgnoreCase("branch")) {
-            new Thread(new Branch(port, port + 1, port + 2)).start();
+            new Thread(new Branch(port, host, port + 1, port + 2)).start();
+            System.out.println("Started");
+
+            Scanner scan = new Scanner(System.in);
+            boolean waiting = true;
+            while (waiting) {
+                System.out.println("Type 'done' when connections are established...");
+                String input = scan.nextLine();
+                if (input.equalsIgnoreCase("done")) {
+                    waiting = false;
+                } else {
+                    waiting = true;
+                }
+            }
+
+            long startTime = System.currentTimeMillis();
+            Test(port, host, 'a');
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
+            System.out.println("TEST : 1 branch / 2 sorters 14 Entry Array\nDuration: " + duration + " ms");
+
         } else if (node.equalsIgnoreCase("sorter")) {
             new Thread(new Sorter(port)).start();
         } else {
@@ -91,7 +112,7 @@ public class MergeSort {
         }
 
         // make sure we didn't hang
-          System.out.println("started");
+
 
 //        new Thread(new Branch(ports.get(0), ports.get(1), ports.get(2))).start();
 //
