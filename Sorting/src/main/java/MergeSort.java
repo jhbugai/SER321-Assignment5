@@ -98,10 +98,12 @@ public class MergeSort {
                 }
             }
 
+            System.out.println("Beginning sort on array 'a'");
             long startTime = System.currentTimeMillis();
             Test(port, host, 'a');
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
+            System.out.println("RESULTS:");
             System.out.println("TEST : 1 branch / 2 sorters 14 Entry Array\nDuration: " + duration + " ms");
 
         } else if (node.equalsIgnoreCase("sorter")) {
