@@ -83,7 +83,8 @@ public class MergeSort {
         // 3   4 5   6
 
         if (node.equalsIgnoreCase("branch")) {
-            new Thread(new Branch(port, host, port + 1, port + 2)).start();
+            port = 9000;
+            new Thread(new Branch(port, host, 9001, 9002)).start();
             System.out.println("Started");
 
             Scanner scan = new Scanner(System.in);
