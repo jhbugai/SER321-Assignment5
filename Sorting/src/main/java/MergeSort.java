@@ -85,7 +85,6 @@ public class MergeSort {
             }
             System.out.println("Started");
 
-            if (node.equalsIgnoreCase("master")) {
                 Scanner scan = new Scanner(System.in);
                 boolean waiting = true;
                 while (waiting) {
@@ -119,7 +118,6 @@ public class MergeSort {
                 endTime = System.currentTimeMillis();
                 duration = endTime - startTime;
                 System.out.println("TEST : 1 Branch / 2 Sorters / 1000 Entry Array\nDuration: " + duration + " ms");
-            }
         } else if (node.equalsIgnoreCase("sorter")) {
          new Thread(new Sorter(port)).start();
             System.out.println("Created new sorter");
