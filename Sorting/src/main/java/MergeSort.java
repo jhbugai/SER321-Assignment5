@@ -95,7 +95,7 @@ public class MergeSort {
 
             System.out.println("Beginning sort on array 'a'");
             long startTime = System.currentTimeMillis();
-            Test(port, host, 'a');
+            Test(port, "localhost", 'a');
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             System.out.println("RESULTS:");
