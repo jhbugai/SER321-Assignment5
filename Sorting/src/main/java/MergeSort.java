@@ -61,8 +61,7 @@ public class MergeSort {
             response = NetworkUtils.send(port, host, remove());
 
             if (response.getBoolean("hasValue")) {
-                System.out.println(response);;
-
+                System.out.println(response);
             } else{
                 break;
             }
@@ -103,6 +102,7 @@ public class MergeSort {
 
         } else if (node.equalsIgnoreCase("sorter")) {
         new Thread(new Sorter(port)).start();
+            System.out.println("Created new sorter");
     } else {
         System.out.println("WRONG");
         System.exit(0);
