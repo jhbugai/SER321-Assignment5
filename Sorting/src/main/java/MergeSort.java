@@ -93,12 +93,27 @@ public class MergeSort {
                 }
             }
 
+            //One branch / Two Sorters / Array 'a'
             long startTime = System.currentTimeMillis();
             Test(port, "localhost", 'a');
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             System.out.println("RESULTS:");
             System.out.println("TEST : 1 branch / 2 sorters 14 Entry Array\nDuration: " + duration + " ms");
+
+            //One branch / Two Sorters / Array 'b'
+            startTime = System.currentTimeMillis();
+            Test(port, "localhost", 'b');
+            endTime = System.currentTimeMillis();
+            duration = endTime - startTime;
+            System.out.println("TEST : 1 Branch / 2 Sorters / 100 Entry Array\nDuration: " + duration + " ms");
+
+            // One branch / Two Sorters / Array 'c'
+            startTime = System.currentTimeMillis();
+            Test(port, "localhost", 'c');
+            endTime = System.currentTimeMillis();
+            duration = endTime - startTime;
+            System.out.println("TEST : 1 Branch / 2 Sorters / 1000 Entry Array\nDuration: " + duration + " ms");
 
         } else if (node.equalsIgnoreCase("sorter")) {
         new Thread(new Sorter(port)).start();
