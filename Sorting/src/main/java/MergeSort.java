@@ -124,7 +124,28 @@ public class MergeSort {
             System.out.println("Created new sorter");
         } else if (node.equalsIgnoreCase("solo")) {
             new Thread(new Sorter(port)).start();
+
+            //One branch / Two Sorters / Array 'a'
+            long startTime = System.currentTimeMillis();
             Test(port, "localhost", 'a');
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
+            System.out.println("RESULTS:");
+            System.out.println("TEST : 1 sorters 14 Entry Array\nDuration: " + duration + " ms");
+
+            //One branch / Two Sorters / Array 'b'
+            startTime = System.currentTimeMillis();
+            Test(port, "localhost", 'b');
+            endTime = System.currentTimeMillis();
+            duration = endTime - startTime;
+            System.out.println("TEST : 1 Sorters / 100 Entry Array\nDuration: " + duration + " ms");
+
+            // One branch / Two Sorters / Array 'c'
+            startTime = System.currentTimeMillis();
+            Test(port, "localhost", 'c');
+            endTime = System.currentTimeMillis();
+            duration = endTime - startTime;
+            System.out.println("TEST : 1 Sorters / 1000 Entry Array\nDuration: " + duration + " ms");
         } else {
             System.out.println("WRONG");
             System.exit(0);
