@@ -1,7 +1,6 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MergeSort {
@@ -38,6 +37,7 @@ public class MergeSort {
         JSONObject response = null;
         if (array == 'a') {
             int[] a = { 5, 1, 6, 2, 3, 4, 10,634,34,23,653, 23,2 ,6 };
+            System.out.println("Sort array 'a'");
             response = NetworkUtils.send(port, host, init(a));
         } else if(array == 'b') {
             int[] b = new int[100];
@@ -71,20 +71,14 @@ public class MergeSort {
 
     public static void main(String[] args) {
         // all the listening ports in the setup
-        ArrayList<Integer> ports = new ArrayList<>();
+        //ArrayList<Integer> ports = new ArrayList<>();
 
         String node = args[0];
         String host = args[1];
         int port = Integer.parseInt(args[2]);
 
-        // setup each of the nodes
-        //      0
-        //   1     2
-        // 3   4 5   6
-
         if (node.equalsIgnoreCase("branch")) {
-            port = 9000;
-            new Thread(new Branch(port, host, 9001, 9002)).start();
+            new Thread(new Branch(port, host, port + 1, port + 2)).start();
             System.out.println("Started");
 
             Scanner scan = new Scanner(System.in);
@@ -108,11 +102,11 @@ public class MergeSort {
             System.out.println("TEST : 1 branch / 2 sorters 14 Entry Array\nDuration: " + duration + " ms");
 
         } else if (node.equalsIgnoreCase("sorter")) {
-            new Thread(new Sorter(port)).start();
-        } else {
-            System.out.println("WRONG");
-            System.exit(0);
-        }
+        new Thread(new Sorter(port)).start();
+    } else {
+        System.out.println("WRONG");
+        System.exit(0);
+    }
 
         // make sure we didn't hang
 
