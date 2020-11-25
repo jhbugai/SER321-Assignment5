@@ -16,20 +16,17 @@ public class NetworkUtils {
         Socket socket = null;
         try {
             // open socket
-            System.out.println("Establishing connection");
             socket = new Socket(host, port);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             // write message
-            System.out.println("Write message");
             out.println(message.toString());
             // expect message in reply
             String line = in.readLine();
             JSONTokener tokener = new JSONTokener(line);
             JSONObject root = new JSONObject(tokener);
 
-            System.out.println("Closing connection");
             // cleanup
             in.close();
             out.close();

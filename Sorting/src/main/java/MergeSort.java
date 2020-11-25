@@ -93,7 +93,6 @@ public class MergeSort {
                 }
             }
 
-            System.out.println("Beginning sort on array 'a'");
             long startTime = System.currentTimeMillis();
             Test(port, "localhost", 'a');
             long endTime = System.currentTimeMillis();
