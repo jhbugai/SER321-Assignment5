@@ -85,40 +85,41 @@ public class MergeSort {
             }
             System.out.println("Started");
 
-            Scanner scan = new Scanner(System.in);
-            boolean waiting = true;
-            while (waiting) {
-                System.out.println("Type 'done' when connections are established...");
-                String input = scan.nextLine();
-                if (input.equalsIgnoreCase("done")) {
-                    waiting = false;
-                } else {
-                    waiting = true;
+            if (node.equalsIgnoreCase("master")) {
+                Scanner scan = new Scanner(System.in);
+                boolean waiting = true;
+                while (waiting) {
+                    System.out.println("Type 'done' when connections are established...");
+                    String input = scan.nextLine();
+                    if (input.equalsIgnoreCase("done")) {
+                        waiting = false;
+                    } else {
+                        waiting = true;
+                    }
                 }
+
+                //One branch / Two Sorters / Array 'a'
+                long startTime = System.currentTimeMillis();
+                Test(port, "localhost", 'a');
+                long endTime = System.currentTimeMillis();
+                long duration = endTime - startTime;
+                System.out.println("RESULTS:");
+                System.out.println("TEST : 1 branch / 2 sorters 14 Entry Array\nDuration: " + duration + " ms");
+
+                //One branch / Two Sorters / Array 'b'
+                startTime = System.currentTimeMillis();
+                Test(port, "localhost", 'b');
+                endTime = System.currentTimeMillis();
+                duration = endTime - startTime;
+                System.out.println("TEST : 1 Branch / 2 Sorters / 100 Entry Array\nDuration: " + duration + " ms");
+
+                // One branch / Two Sorters / Array 'c'
+                startTime = System.currentTimeMillis();
+                Test(port, "localhost", 'c');
+                endTime = System.currentTimeMillis();
+                duration = endTime - startTime;
+                System.out.println("TEST : 1 Branch / 2 Sorters / 1000 Entry Array\nDuration: " + duration + " ms");
             }
-
-            //One branch / Two Sorters / Array 'a'
-            long startTime = System.currentTimeMillis();
-            Test(port, "localhost", 'a');
-            long endTime = System.currentTimeMillis();
-            long duration = endTime - startTime;
-            System.out.println("RESULTS:");
-            System.out.println("TEST : 1 branch / 2 sorters 14 Entry Array\nDuration: " + duration + " ms");
-
-            //One branch / Two Sorters / Array 'b'
-            startTime = System.currentTimeMillis();
-            Test(port, "localhost", 'b');
-            endTime = System.currentTimeMillis();
-            duration = endTime - startTime;
-            System.out.println("TEST : 1 Branch / 2 Sorters / 100 Entry Array\nDuration: " + duration + " ms");
-
-            // One branch / Two Sorters / Array 'c'
-            startTime = System.currentTimeMillis();
-            Test(port, "localhost", 'c');
-            endTime = System.currentTimeMillis();
-            duration = endTime - startTime;
-            System.out.println("TEST : 1 Branch / 2 Sorters / 1000 Entry Array\nDuration: " + duration + " ms");
-
         } else if (node.equalsIgnoreCase("sorter")) {
          new Thread(new Sorter(port)).start();
             System.out.println("Created new sorter");
