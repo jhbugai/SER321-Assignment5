@@ -76,9 +76,13 @@ public class MergeSort {
         String node = args[0];
         int port = Integer.parseInt(args[1]);
 
-        if (node.equalsIgnoreCase("branch")) {
+        if (node.equalsIgnoreCase("branch") || node.equalsIgnoreCase("master")) {
             String host = args[2];
-            new Thread(new Branch(port, host, port + 1, port + 2)).start();
+            if (node.equalsIgnoreCase("branch")) {
+                new Thread(new Branch(port, host, port + 1, port + 2)).start();
+            } else {
+                new Thread(new Branch(port, host, port + 1, port + 4)).start();
+            }
             System.out.println("Started");
 
             Scanner scan = new Scanner(System.in);
@@ -116,12 +120,15 @@ public class MergeSort {
             System.out.println("TEST : 1 Branch / 2 Sorters / 1000 Entry Array\nDuration: " + duration + " ms");
 
         } else if (node.equalsIgnoreCase("sorter")) {
-        new Thread(new Sorter(port)).start();
+         new Thread(new Sorter(port)).start();
             System.out.println("Created new sorter");
-    } else {
-        System.out.println("WRONG");
-        System.exit(0);
-    }
+        } else if (node.equalsIgnoreCase("solo")) {
+            new Thread(new Sorter(port)).start();
+            Test(port, "localhost", 'a');
+        } else {
+            System.out.println("WRONG");
+            System.exit(0);
+        }
 
         // make sure we didn't hang
 
