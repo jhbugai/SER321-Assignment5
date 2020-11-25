@@ -33,6 +33,7 @@ public abstract class Node implements Runnable {
                 try {
                     // listen for connection
                     conn = socket.accept();
+                    System.out.println("Connection accepted");
 
                     // read in a message
                     JSONObject root = NetworkUtils.read(conn);
