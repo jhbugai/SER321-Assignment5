@@ -74,10 +74,10 @@ public class MergeSort {
         //ArrayList<Integer> ports = new ArrayList<>();
 
         String node = args[0];
-        String host = args[1];
-        int port = Integer.parseInt(args[2]);
+        int port = Integer.parseInt(args[1]);
 
         if (node.equalsIgnoreCase("branch")) {
+            String host = args[2];
             new Thread(new Branch(port, host, port + 1, port + 2)).start();
             System.out.println("Started");
 
