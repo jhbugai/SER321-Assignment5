@@ -38,6 +38,7 @@ public class MergeSort {
         if (array == 'a') {
             int[] a = { 5, 1, 6, 2, 3, 4, 10,634,34,23,653, 23,2 ,6 };
             System.out.println("Sort array 'a'");
+            System.out.println(host + ":" + port);
             response = NetworkUtils.send(port, host, init(a));
         } else if(array == 'b') {
             int[] b = new int[100];
